@@ -69,7 +69,7 @@ def time_check():
 
 def trace_check():
     if sys.gettrace():
-        sys.exit("[+][-] Anti Crack!")
+        sys.exit("[+][-] Anti-Crack!")
 
 def process_check():
     debug_tools = ["ollydbg", "ida", "x64dbg", "gdb", "windbg"]
@@ -82,7 +82,7 @@ def integrity_check():
         code = f.read()
     expected_hash = hashlib.sha256(code).hexdigest()
     if expected_hash != hashlib.sha256(code).hexdigest():
-        sys.exit("[+][-] Anti Debug!")
+        sys.exit("[+][-] Anti-Debug!")
 
 def junk_code():
     return ''.join(random.choice(string.ascii_letters) for _ in range(random.randint(50, 100)))
