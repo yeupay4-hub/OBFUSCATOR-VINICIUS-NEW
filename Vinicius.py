@@ -128,6 +128,14 @@ def Scramble(data, outfile, use_anticrack):
         "    raise SystemExit\n"
     )
 
+    try_block = (
+        "try:\n"
+        "    _Vinicius_ = None"
+        "\n"
+        "except Exception:\n"
+        "    raise SystemExit\n"
+    )
+
     _loading_src = "print('>> Loading...')\n__import__('time').sleep(0.5)\n"
     _loading_m = marshal.dumps(compile(_loading_src, '<x>', 'exec'))
     _loading_b64 = base64.b64encode(_loading_m).decode()
@@ -136,7 +144,7 @@ def Scramble(data, outfile, use_anticrack):
 
     decoder_lambda = "_ = lambda __: __import__('marshal').loads(__import__('gzip').decompress(__import__('lzma').decompress(__import__('zlib').decompress(__import__('base64').b64decode(__[::-1])))))\n"
 
-    prefix = assignments + check_block + preamble + decoder_lambda
+    prefix = assignments + check_block + try_block + preamble + decoder_lambda
 
     if use_anticrack:
         noise = base64.b64encode(junk_code().encode()).decode()
@@ -146,8 +154,8 @@ def Scramble(data, outfile, use_anticrack):
         rounds_local = int(rounds)
     except Exception:
         rounds_local = 3
-    if rounds_local > 500:
-        rounds_local = 500
+    if rounds_local > 200:
+        rounds_local = 200
 
     try:
         for i in range(rounds_local, 0, -1):
@@ -242,3 +250,4 @@ def StartFlow():
 
 if __name__ == "__main__":
     StartFlow()
+
